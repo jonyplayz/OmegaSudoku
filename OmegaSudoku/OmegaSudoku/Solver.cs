@@ -458,6 +458,7 @@ namespace OmegaSudoku
                                 {
                                     for (int n2 = 0; n2 < ((int)Math.Sqrt(scheme)); n2++)
                                     {
+                                        if (board[startPoint_row + n1, startPoint_column + n2] != 0 && (startPoint_row + n1 != row || startPoint_column + n2 != column) && (n1 != i || n2 != j))
                                         {
                                             foreach(int num in options[startPoint_row + n1, startPoint_column + n2])
                                             {

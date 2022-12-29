@@ -70,24 +70,32 @@ namespace OmegaSudoku
                     {
                         if (!errorOccured)
                         {
-                            if (appearancesY[board[i, j] - 1] == 0)
+                            if (board[i, j] != 0)
                             {
-                                appearancesY[board[i, j] - 1] = 1;
+                                if (appearancesY[board[i, j] - 1] == 0)
+                                {
+                                    appearancesY[board[i, j] - 1] = 1;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("the data you provided is not valid, the sudoku data has the same number in the same row");
+                                    errorOccured = true;
+                                }
                             }
-                            else
+                            if(board[j, i] != 0 && !errorOccured)
                             {
-                                Console.WriteLine("the data you provided is not valid, the sudoku data has the same number in the same row");
-                                errorOccured = true;
+                                if (appearancesX[board[j, i] - 1] == 0)
+                                {
+                                    appearancesX[board[j, i] - 1] = 1;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("the data you provided is not valid, the sudoku data has the same number in the same column");
+                                    errorOccured = true;
+                                }
+                                
                             }
-                            if(appearancesX[board[j,i]-1] == 0 && !errorOccured)
-                            {
-                                appearancesX[board[j, i] - 1] = 1;
-                            }
-                            else
-                            {
-                                Console.WriteLine("the data you provided is not valid, the sudoku data has the same number in the same column");
-                                errorOccured = true;
-                            }
+                            
                         }
                         
                     }

@@ -17,15 +17,15 @@ namespace OmegaSudoku
                     if (board[i, j] != 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(string.Format("{0}", board[i, j]));
+                        Console.Write(string.Format("{0}", Convert.ToChar(board[i, j] + '0')));
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(string.Format("{0}", board[i, j]));
+                        Console.Write(string.Format("{0}", Convert.ToChar(board[i, j] + '0')));
                     }
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("  |  ", board[i, j]);
+                    Console.Write("  |  ");
                 }
                 Console.WriteLine("");
                 for (int j = 0; j < schemeInt * 6; j++)

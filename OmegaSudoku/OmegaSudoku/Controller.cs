@@ -15,28 +15,28 @@ namespace OmegaSudoku
 {
     class Controller
     {
-        public void startSudokuSolver()
+        public void startSudokuSolver() //this function handles the start and the continuity of the sudoku solver
         {
             var watch = new System.Diagnostics.Stopwatch();
             
-            Boolean quitting = false;
-            Boolean errorOccured = false;
+            Boolean quitting = false;   //a flag to indicate if the user wants to quit the app
+            Boolean errorOccured = false;   //a flag to indicate if an error has been occurred
             Console.WriteLine("welcome to the Omega Sudoku Solver\n");
             
             while (!quitting)
             {
                 Console.WriteLine("please enter the sudoku data to start solving or 'quit' to quit\n");
                 errorOccured = false;
-                Console.SetIn(new StreamReader(Console.OpenStandardInput(8192)));
+                Console.SetIn(new StreamReader(Console.OpenStandardInput(8192)));   //a change so we can input more then 253 charecters
                 string sudokuData = Console.ReadLine();
                 watch.Restart();
                 watch.Start();
                 if (sudokuData != "quit")
                 {
                     Exceptions exceptions = new Exceptions();
-                    errorOccured = exceptions.checkForExceptions(sudokuData);
+                    errorOccured = exceptions.checkForExceptions(sudokuData);   //checks for any exceptions
 
-                    if (!errorOccured)
+                    if (!errorOccured)  //coverts the sudoku data into a sudoku board
                     {
                         double scheme = Math.Sqrt(sudokuData.Length);
                         int schemeInt = Convert.ToInt32(scheme);
@@ -56,24 +56,14 @@ namespace OmegaSudoku
                         }
 
                         Printer printer = new Printer();
-                        printer.printSudoku(schemeInt, board);
+                        printer.printSudoku(schemeInt, board);  //prints the original sudoku board
 
-
-
-                        List<int>[,] options = new List<int>[schemeInt, schemeInt];
-                        for (int i = 0; i < schemeInt; i++)
-                        {
-                            for (int j = 0; j < schemeInt; j++)
-                            {
-                                options[i, j] = new List<int>();
-                            }
-
-                        }
-
-                        int[,] result = new int[schemeInt, schemeInt];
+                        int[,] result = new int[schemeInt, schemeInt];  //the solved board
                         Solver solver = new Solver();
-                        result = solver.solve(schemeInt, board, options);
-                        if (result == null)
+                        testDLX tdlx = new testDLX();
+                        //result = tdlx.run(board, schemeInt);
+                        result = solver.solve(board, schemeInt);    //a call to the solve method to start solving the board
+                        if (result == null) //if the result is null then the board is unsolveable
                         {
                             watch.Stop();
                             Console.WriteLine("the board is not valid and cannot be solved");
@@ -81,11 +71,11 @@ namespace OmegaSudoku
                         else
                         {
                             Console.WriteLine("and the answer is:");
-                            printer.printSudoku(schemeInt, result);
+                            printer.printSudoku(schemeInt, result); //prints the solved board
                             watch.Stop();
-                            Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
+                            Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");   //prints how many miliseconds it took to solve
                             string resultInString = "";
-                            for (int i = 0; i < schemeInt; i++)
+                            for (int i = 0; i < schemeInt; i++) //inputs the solved board into a string in a sudoku data form
                             {
                                 for (int j = 0; j < schemeInt; j++)
                                 {

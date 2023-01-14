@@ -10,7 +10,7 @@ namespace OmegaSudoku
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args) //this is the main program of the project. it starts the sudoku solver.
         {
             Controller controller = new Controller();
             controller.startSudokuSolver();

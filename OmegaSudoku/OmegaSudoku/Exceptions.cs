@@ -9,10 +9,10 @@ namespace OmegaSudoku
     class Exceptions
     {
 
-        public Boolean checkForExceptions(string sudokuData)
+        public Boolean checkForExceptions(string sudokuData)    //this function checks for any exceptions from a given input of sudoku data.
         {
             Boolean errorOccured = false;
-            if (sudokuData.Length == 0)
+            if (sudokuData.Length == 0) //check for empty data
             {
                 Console.WriteLine("the data you provided is not valid, you entered an empty string\n");
                 errorOccured = true;
@@ -20,7 +20,7 @@ namespace OmegaSudoku
 
 
             double scheme = Math.Sqrt(sudokuData.Length);
-            if ((scheme != 1 && scheme != 4 && scheme != 9 && scheme != 16 && scheme != 25) && !errorOccured)
+            if ((scheme != 1 && scheme != 4 && scheme != 9 && scheme != 16 && scheme != 25) && !errorOccured)   //check for wrong size
             {
                 Console.WriteLine("the data you provided is not valid, the sudoku size can only be 1x1, 4x4, 9x9, 16x16, 25x25\n");
                 errorOccured = true;
@@ -29,7 +29,7 @@ namespace OmegaSudoku
             {
                 foreach (char c in sudokuData)
                 {
-                    if ((c > (48 + scheme) || c < '0') && !errorOccured)
+                    if ((c > (48 + scheme) || c < '0') && !errorOccured)    //check for wrong charecters
                     {
                         Console.WriteLine("the data you provided is not valid, you can only input these characters:");
                         Console.Write("0 ");
@@ -72,19 +72,20 @@ namespace OmegaSudoku
                         {
                             if (board[i, j] != 0)
                             {
-                                if (appearancesY[board[i, j] - 1] == 0)
+                                if (appearancesY[board[i, j] - 1] == 0) //checks for wrong initial data
                                 {
                                     appearancesY[board[i, j] - 1] = 1;
                                 }
                                 else
                                 {
                                     Console.WriteLine("the data you provided is not valid, the sudoku data has the same number in the same row");
+                                    
                                     errorOccured = true;
                                 }
                             }
                             if(board[j, i] != 0 && !errorOccured)
                             {
-                                if (appearancesX[board[j, i] - 1] == 0)
+                                if (appearancesX[board[j, i] - 1] == 0) //checks for wrong initial data
                                 {
                                     appearancesX[board[j, i] - 1] = 1;
                                 }

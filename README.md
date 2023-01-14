@@ -2,6 +2,8 @@
 <pre>
 OmegaSudoku can help you solve all types of sudoku puzzles.
 
+OmegaSudoku utilizes the Dancing Links X (DLX) algorithm to solve sudoku boards from 1x1 to 25x25 the fastest way.
+
 This project is in c# and written with visual studio 2019.
 
 follow these simple steps to use the sudoku solver:

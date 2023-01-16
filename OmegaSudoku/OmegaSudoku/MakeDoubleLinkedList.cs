@@ -107,7 +107,7 @@ namespace OmegaSudoku
             curColumn = (ColumnNode)root.right;
 
             // link the last column elements with the corresponding columnHeads
-            for (int i = 0; i < coverMat.GetLength(1); i++)
+            for (int col = 0; col < coverMat.GetLength(1); col++)
             {
                 Node colElement = curColumn;
                 while (colElement.down != null)

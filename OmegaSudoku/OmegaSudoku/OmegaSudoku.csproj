@@ -46,8 +46,9 @@
     <Compile Include="ColumnID.cs" />
     <Compile Include="ColumnNode.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="CustomExceptions.cs" />
     <Compile Include="DLXAlgorithm.cs" />
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="ValidateBoard.cs" />
     <Compile Include="MakeCoverMatrix.cs" />
     <Compile Include="MakeDoubleLinkedList.cs" />
     <Compile Include="Node.cs" />

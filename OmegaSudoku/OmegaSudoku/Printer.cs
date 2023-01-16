@@ -6,46 +6,70 @@ using System.Threading.Tasks;
 
 namespace OmegaSudoku
 {
-    class Printer
+    public static class Printer
     {
-        public void printSudoku(int schemeInt,int[,] board) //this method prints out a given sudoku board, it uses colors to display which numbers are have been inputted and which are not
+        public static void printSudoku(int schemeInt,int[,] board) //this method prints out a given sudoku board, it uses colors to display which numbers have been inputted and which are not
+                                                                    //and also seperates the boxes with color
         {
-            for (int i = 0; i < schemeInt; i++)
+            int sqrtSize = (int)Math.Sqrt(schemeInt);
+            int rowBoxes = sqrtSize - 1;
+            for (int row = 0; row < schemeInt; row++)
             {
-                int boxes = (int)Math.Sqrt(schemeInt) - 1;
-                for (int j = 0; j < schemeInt; j++)
+                int columnBoxes = sqrtSize - 1;
+                
+                for (int col = 0; col < schemeInt; col++)
                 {
-                    if (board[i, j] != 0)
+                    if (board[row, col] != 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write(string.Format("{0}", Convert.ToChar(board[i, j] + '0')));
+                        Console.Write(string.Format("{0}", Convert.ToChar(board[row, col] + '0')));
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(string.Format("{0}", Convert.ToChar(board[i, j] + '0')));
+                        Console.Write(string.Format("{0}", Convert.ToChar(board[row, col] + '0')));
                     }
-
-                    if(j == boxes)
+                    if(col + 1 != schemeInt)
                     {
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.Write("  |  ");
-                        boxes += 3;
+                        if (col == columnBoxes)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.Write("  |  ");
+                            columnBoxes += sqrtSize;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write("  |  ");
+                        }
+                        
+                    }
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                }
+
+                Console.WriteLine("");
+                if(row+1 != schemeInt)
+                {
+                    if(row == rowBoxes)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        rowBoxes += sqrtSize;
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("  |  ");
-                    }
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
 
-                Console.WriteLine("");
-                for (int j = 0; j < schemeInt * 6; j++)
-                {
-                    Console.Write("-");
+                    }
+                    for (int j = 0; j < schemeInt * 6 - 4; j++)
+                    {
+                        Console.Write("-");
+                    }
+                    Console.WriteLine("");
                 }
-                Console.WriteLine("");
+                
+                Console.ForegroundColor = ConsoleColor.White;
+
             }
             Console.WriteLine("");
         }

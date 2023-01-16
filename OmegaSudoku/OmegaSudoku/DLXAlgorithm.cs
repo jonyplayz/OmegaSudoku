@@ -27,33 +27,33 @@ namespace OmegaSudoku
             {
                 return;
             }
-            ColumnNode c = choose(root);    //chooses the best column to start covering from
-            Node r = c.down; //goes to the first node of the column
-            cover(c); //covering the chosen column
-            while (r != c)
+            ColumnNode chosenCol = choose(root);    //chooses the best column to start covering from
+            Node firstNodeOfCol = chosenCol.down; //goes to the first node of the column
+            cover(chosenCol); //covering the chosen column
+            while (firstNodeOfCol != chosenCol)
             {
-                solution.Add(r); //adding the solution nodes to the arraylist
-                Node j = r.right; //getting the node to the right of the current node
-                while (j != r) //covering all the nodes in the same row as the current node
+                solution.Add(firstNodeOfCol); //adding the solution nodes to the arraylist
+                Node nextNode = firstNodeOfCol.right; //getting the node to the right of the current node
+                while (nextNode != firstNodeOfCol) //covering all the nodes in the same row as the current node
                 {
-                    cover(j.head);
-                    j = j.right;
+                    cover(nextNode.head);
+                    nextNode = nextNode.right;
                 }
                 search(k + 1, schemeInt, root); //calling the search function again to continue to discover the toridoal list
 
-                r = (Node)solution[k]; //if we didnt find the exact cover we need to backtrack so we remove the node from the solution list and start to uncover everything that we covered
+                firstNodeOfCol = (Node)solution[k]; //if we didnt find the exact cover we need to backtrack so we remove the node from the solution list and start to uncover everything that we covered
                 solution.RemoveAt(k);
-                c = r.head;
-                j = r.left;
-                while (j != r)
+                chosenCol = firstNodeOfCol.head;
+                nextNode = firstNodeOfCol.left;
+                while (nextNode != firstNodeOfCol)
                 {
-                    uncover(j.head);
-                    j = j.left;
+                    uncover(nextNode.head);
+                    nextNode = nextNode.left;
                 }
-                r = r.down;
+                firstNodeOfCol = firstNodeOfCol.down;
 
             }
-            uncover(c);
+            uncover(chosenCol);
             return;
 
 
